@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import {useReducer} from 'react';
+import Counter from './counterExample';
+import { CounterContactProvider } from './contextConfig';
+import CounterReducer from './counterReducer';
+
 
 function App() {
+   let initialState = { Counter: 0 }
+    const [state, dispatch] = useReducer(CounterReducer, initialState)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CounterContactProvider initialState={initialState} reducer={CounterReducer}>
+      <div className="App">
+        <Counter></Counter>
+      </div>
+    </CounterContactProvider>
   );
 }
 
